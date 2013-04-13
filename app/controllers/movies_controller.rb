@@ -9,14 +9,14 @@ class MoviesController < ApplicationController
   def index
     sort = params[:sort] || session[:sort]
     case sort
-    when 'title'
-      ordering,@title_header = {:order => :title}, 'hilite'
-    when 'release_date'
-      ordering,@date_header = {:order => :release_date}, 'hilite'
+      when 'title'
+        ordering,@title_header = {:order => :title}, 'hilite'
+      when 'release_date'
+        ordering,@date_header = {:order => :release_date}, 'hilite'
     end
     @all_ratings = Movie.all_ratings
-    @selected_ratings = params[:ratings] || session[:ratings] || {}
     
+    @selected_ratings = params[:ratings] || session[:ratings] || {}
     if @selected_ratings == {}
       @selected_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
     end
